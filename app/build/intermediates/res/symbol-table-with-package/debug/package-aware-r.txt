@@ -11,6 +11,7 @@ anim abc_slide_out_bottom
 anim abc_slide_out_top
 anim abc_tooltip_enter
 anim abc_tooltip_exit
+array location_item
 array sort_item
 array store_item
 attr actionBarDivider
@@ -961,7 +962,6 @@ id showCustom
 id showHome
 id showTitle
 id sort_spn
-id sort_test_txt
 id spacer
 id split_action_bar
 id spread
@@ -976,7 +976,6 @@ id store_img
 id store_list
 id store_search
 id store_spn
-id store_test_txt
 id store_txt
 id submenuarrow
 id submit_area
