@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity
         //kong
 
         imageView = findViewById(R.id.imageView);
-        surfaceView = findViewById(R.id.activity_surfaceView);
+        surfaceView = findViewById(R.id.activity_surface_view);
         capture_btn = (ImageButton)findViewById(R.id.capture_btn);
 
         tessBaseAPI = new TessBaseAPI();

@@ -13,10 +13,10 @@
         android:layout_weight="1144"
         android:background="#FFF">
 
-        <org.opencv.android.JavaCameraView
+        <org.opencv.android.CameraSurfaceView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/activity_surface_view" />
+            android:id="@+id/activity_surface_view"/>
 
     </LinearLayout>
 
@@ -65,7 +65,7 @@
                 android:src="@drawable/capture"
                 android:scaleType="fitCenter"
                 android:background="@android:color/transparent"
-                android:onClick="onClick_course_ask"/>
+                android:onClick="onClick_capture"/>
 
             <Space
                 android:layout_width="0dp"
