@@ -2,36 +2,40 @@
 <instant-run
     abi="x86"
     api-level="28"
-    build-mode="COLD"
+    build-mode="HOT_WARM"
     density="420dpi"
     format="10"
     plugin-version="3.4.1"
-    timestamp="1560592670494"
+    timestamp="1560656247694"
     token="7071682928687001883"
-    verifier="COLD_SWAP_REQUESTED" >
+    verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="860" />
     <task
         name="instant-run-dex"
-        duration="0" />
+        duration="14" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="16" />
     <task
         name="verifier"
-        duration="0" />
+        duration="3" />
+
+    <artifact
+        location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/reload-dex/debug/classes.dex"
+        type="RELOAD_DEX" />
 
     <build
         build-mode="FULL"
-        timestamp="1560592168798"
+        timestamp="1560655192371"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
+            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
             type="SPLIT" />
         <artifact
-            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/split-apk/debug/slices/slice_4.apk"
+            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/split-apk/debug/dep/dependencies.apk"
             type="SPLIT" />
         <artifact
             location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/split-apk/debug/slices/slice_5.apk"
@@ -69,15 +73,76 @@
     </build>
     <build
         build-mode="COLD"
-        timestamp="1560592550941"
+        ir-eligibility="COMPATIBLE"
+        timestamp="1560655785860"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/resources/instant-run/debug/resources-debug.apk"
+            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/split-apk/debug/slices/slice_6.apk"
             type="SPLIT" />
     </build>
     <build
-        build-mode="COLD"
-        timestamp="1560592670494"
-        verifier="COLD_SWAP_REQUESTED" />
+        build-mode="HOT_WARM"
+        timestamp="1560655914037"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/builds/debug/1560655914037/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1560655972246"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/builds/debug/1560655972246/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1560655998651"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/builds/debug/1560655998651/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1560656055435"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/builds/debug/1560656055435/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1560656083161"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/builds/debug/1560656083161/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1560656158209"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/builds/debug/1560656158209/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1560656185997"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/builds/debug/1560656185997/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1560656247694"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/reload-dex/debug/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
 
 </instant-run>

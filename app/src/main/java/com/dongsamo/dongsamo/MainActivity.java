@@ -1,5 +1,7 @@
 package com.dongsamo.dongsamo;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -7,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +45,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import static java.lang.Thread.sleep;
+
 
 public class MainActivity extends AppCompatActivity
         implements CameraBridgeViewBase.CvCameraViewListener2 {
@@ -51,6 +56,7 @@ public class MainActivity extends AppCompatActivity
     //private CameraBridgeViewBase mOpenCvCameraView;
     private Mat matInput;
     private Mat matResult;
+    private AsyncTess task;
 
     //kongil
 
@@ -136,6 +142,7 @@ public class MainActivity extends AppCompatActivity
 
     //by kongil
     public void onClick_capture(View view) {
+        task = new AsyncTess();
         capture();
     }
 
@@ -195,11 +202,70 @@ public class MainActivity extends AppCompatActivity
 
                 capture_btn.setEnabled(false);
                 capture_btn.setImageResource(R.drawable.loading_btn);
-                new AsyncTess().execute(bitmap);
+                //1000 -> 1 sec
+                new AsyncTaskCancelTimerTask(task, 3000, 1000, true).start();
+                task.execute(bitmap);
 
                 camera.startPreview();
+
             }
         });
+    }
+
+    //jeong add -> time over check
+    class AsyncTaskCancelTimerTask extends CountDownTimer {
+        private AsyncTask asyncTask;
+        private boolean interrupt;
+
+        private AsyncTaskCancelTimerTask(AsyncTask asyncTask, long startTime, long interval) {
+            super(startTime, interval);
+            this.asyncTask = asyncTask;
+        }
+
+        private AsyncTaskCancelTimerTask(AsyncTask asyncTask, long startTime, long interval, boolean interrupt) {
+            super(startTime, interval);
+            this.asyncTask = asyncTask;
+            this.interrupt = interrupt;
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+            Log.d(TAG, "onTick..");
+
+            if(asyncTask == null) {
+                this.cancel();
+                return;
+            }
+
+            if(asyncTask.isCancelled())
+                this.cancel();
+
+            if(asyncTask.getStatus() == AsyncTask.Status.FINISHED)
+                this.cancel();
+        }
+
+        @Override
+        public void onFinish() {
+            Log.d(TAG, "onTick..");
+            Toast.makeText(MainActivity.this, "인식 실패", Toast.LENGTH_LONG).show();
+            if(asyncTask == null || asyncTask.isCancelled() )
+                return;
+
+            try {
+                if(asyncTask.getStatus() == AsyncTask.Status.FINISHED)
+                    return;
+
+                if(asyncTask.getStatus() == AsyncTask.Status.PENDING ||
+                        asyncTask.getStatus() == AsyncTask.Status.RUNNING ) {
+                    Log.d("check", "finish");
+                    capture_btn.setEnabled(true);
+                    capture_btn.setImageResource(R.drawable.capture);
+                    asyncTask.cancel(interrupt);
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public synchronized static Bitmap GetRotatedBitmap(Bitmap bitmap, int degrees) {
@@ -221,6 +287,7 @@ public class MainActivity extends AppCompatActivity
     private class AsyncTess extends AsyncTask<Bitmap, Integer, String> {
         @Override
         protected String doInBackground(Bitmap... mRelativeParams) {
+
             tessBaseAPI.setImage(mRelativeParams[0]);
             return tessBaseAPI.getUTF8Text();
         }
@@ -231,6 +298,7 @@ public class MainActivity extends AppCompatActivity
             Log.d("TAGS", "result : "+ result);
             capture_btn.setEnabled(true);
             capture_btn.setImageResource(R.drawable.capture);
+            task.cancel(true);
         }
     }
 
@@ -291,7 +359,6 @@ public class MainActivity extends AppCompatActivity
 
         return matResult;
     }
-
 
 
     //여기서부턴 퍼미션 관련 메소드
