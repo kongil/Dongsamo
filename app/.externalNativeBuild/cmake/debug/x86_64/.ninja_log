@@ -1,0 +1,7 @@
+# ninja log v5
+0	1946	1560593005	CMakeFiles/native-lib.dir/native-lib.cpp.o	371ee16cb7e582db
+1947	1999	1560593005	/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/cmake/debug/obj/x86_64/libnative-lib.so	2caa105e2afbec6b
+1	2091	1560593220	CMakeFiles/native-lib.dir/native-lib.cpp.o	371ee16cb7e582db
+2091	2150	1560593220	/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/cmake/debug/obj/x86_64/libnative-lib.so	2caa105e2afbec6b
+2	2167	1560593489	CMakeFiles/native-lib.dir/native-lib.cpp.o	371ee16cb7e582db
+2167	2228	1560593489	/Users/MIPUNG/Desktop/Dongsamo/app/build/intermediates/cmake/debug/obj/x86_64/libnative-lib.so	2caa105e2afbec6b
