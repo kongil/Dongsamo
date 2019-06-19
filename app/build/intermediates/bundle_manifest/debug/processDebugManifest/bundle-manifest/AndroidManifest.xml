@@ -73,6 +73,7 @@
         <activity
             android:name="com.dongsamo.dongsamo.CustomWidget"
             android:theme="@android:style/Theme.Dialog" />
+        <activity android:name="com.dongsamo.dongsamo.PostActivity" />
         <activity
             android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
             android:excludeFromRecents="true"

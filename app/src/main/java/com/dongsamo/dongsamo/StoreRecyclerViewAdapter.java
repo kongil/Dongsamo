@@ -43,7 +43,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
     @Override
     public void onBindViewHolder(@NonNull final MyViewHoler myViewHoler, final int i) {
         myViewHoler.card_name.setText(String.valueOf(mData.get(i).getName()));
-        myViewHoler.card_distance.setText(""+String.valueOf(mData.get(i).getDistance())+" 이내");
+        myViewHoler.card_distance.setText(""+String.valueOf(mData.get(i).getX())+" 이내"); // 수정 필요
         myViewHoler.card_star.setText(String.valueOf(mData.get(i).getStar()));
 
         //kong todo true_heart일 때 DB 좋아요 데이터 true, false_heart일 때 DB 좋아요 false
@@ -52,7 +52,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
         else
             myViewHoler.card_heart.setImageResource(R.drawable.false_heart);
 
-        Glide.with(mContext).load(""+mData.get(i).getImg_url()).into(myViewHoler.card_img);
+        Glide.with(mContext).load(""+mData.get(i).getUrl()).into(myViewHoler.card_img);
 
         myViewHoler.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

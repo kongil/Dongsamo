@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
+import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
@@ -14,8 +17,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-
-
 import android.content.DialogInterface;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
@@ -23,11 +24,8 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.view.SurfaceView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dongsamo.dongsamo.firebase_control.Store;
@@ -40,11 +38,9 @@ import com.googlecode.tesseract.android.TessBaseAPI;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
-//import org.opencv.android.JavaCameraView;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
-import org.opencv.osgi.OpenCVNativeLoader;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -93,7 +89,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -191,19 +186,39 @@ public class MainActivity extends AppCompatActivity
                 options.inSampleSize = 8;
 
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                bitmap = GetRotatedBitmap(bitmap, 0); //90 -> 0
+                bitmap = GetRotatedBitmap(bitmap, 90); //90 -> 0
 
                 capture_btn.setEnabled(false);
                 capture_btn.setImageResource(R.drawable.loading_btn);
 
-                imageView.setImageBitmap(bitmap);
+                Bitmap tmp = grayScale(bitmap);
+
+                imageView.setImageBitmap(tmp);
+
                 //1000 -> 1 sec
-                new AsyncTaskCancelTimerTask(task, 3000, 1000, true).start();
+                new AsyncTaskCancelTimerTask(task, 10000, 1000, true).start();
                 task.execute(bitmap);
                 camera.startPreview();
             }
         });
     }
+    private Bitmap grayScale(final Bitmap orgBitmap){
+        int width, height;
+        width = orgBitmap.getWidth();
+        height = orgBitmap.getHeight();
+
+        Bitmap bmpGrayScale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_4444);
+        Canvas canvas = new Canvas(bmpGrayScale);
+        Paint paint = new Paint();
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(0);
+        ColorMatrixColorFilter colorMatrixFilter = new ColorMatrixColorFilter(colorMatrix);
+        paint.setColorFilter(colorMatrixFilter);
+        canvas.drawBitmap(orgBitmap , 0 , 0 , paint);
+        return bmpGrayScale;
+
+    }
+
 
 
     //jeong add -> time over check
@@ -409,7 +424,8 @@ public class MainActivity extends AppCompatActivity
 
     //여기서부턴 퍼미션 관련 메소드
     static final int PERMISSIONS_REQUEST_CODE = 1000;
-    String[] PERMISSIONS  = {"android.permission.CAMERA"};
+    String[] PERMISSIONS  = {"android.permission.CAMERA", "android.permission.ACCESS_FINE_LOCATION"};
+
 
 
     private boolean hasPermissions(String[] permissions) {

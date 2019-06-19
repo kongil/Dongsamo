@@ -60,6 +60,8 @@
         <activity
             android:name=".CustomWidget"
             android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".PostActivity" />
     </application>
 
 </manifest>
